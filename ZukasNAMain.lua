@@ -8422,7 +8422,7 @@ cmd.add({"clearautoexec", "caexec", "clearauto", "autoexecclear", "aexecclear", 
 	})
 end)
 
-cmd.add({"zukahub","zhub"},{"zukarayhub (zhub)","The Main GUI"},function()
+cmd.add({"zukahub","zhub"},{"zukahub (zhub)","The Main GUI"},function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/zukatechdevelopment-ux/thingsandstuff/refs/heads/main/ZukaHub.lua"))()
 end)
 
@@ -8438,7 +8438,7 @@ cmd.add({"xvc","xhub"},{"xvc (xhub)","The Best Hub"},function()
     loadstring(game:HttpGet("https://pastebin.com/raw/Piw5bqGq"))()
 end)
 
-cmd.add({"aimz","zaim"},{"aimz (zaim)","Quick Aimbot"},function()
+cmd.add({"aimz","aimz"},{"aimz (aimz)","Quick Aimbot"},function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/zukatechdevelopment-ux/thingsandstuff/refs/heads/main/ZukasAimbot.lua"))()
 end)
 
