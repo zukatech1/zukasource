@@ -719,19 +719,47 @@ G2L["50"]["Color"] = vapor_accent_gradient;
 G2L["51"] = Instance.new("TextBox", G2L["4d"]);
 G2L["51"]["Active"] = false;
 G2L["51"]["Name"] = [[Input]];
-G2L["51"]["ZIndex"] = 2;
+G2L["51"]["ZIndex"] = 3;
 G2L["51"]["TextWrapped"] = true;
 G2L["51"]["TextSize"] = 20;
 G2L["51"]["TextColor3"] = vapor_cyan;
 G2L["51"]["TextScaled"] = true;
-G2L["51"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["51"]["BackgroundColor3"] = vapor_darkPurple;
 G2L["51"]["FontFace"] = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["51"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
 G2L["51"]["ClipsDescendants"] = true;
 G2L["51"]["Size"] = UDim2.new(1, -10, 0.7, 0);
 G2L["51"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
 G2L["51"]["Text"] = [[]];
-G2L["51"]["BackgroundTransparency"] = 1;
+G2L["51"]["BackgroundTransparency"] = 0.4;
+
+local inputCorner = Instance.new("UICorner", G2L["51"])
+inputCorner.CornerRadius = UDim.new(0, 6)
+
+local inputStroke = Instance.new("UIStroke", G2L["51"])
+inputStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+inputStroke.Color = vapor_pink -- CHANGED
+inputStroke.Thickness = 1.5
+
+-- NEW SCRIPT: Handles fading out the input box when the bar closes
+task.spawn(function()
+    local TweenService = game:GetService("TweenService")
+    local fadeOutInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    
+    G2L["4d"]:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+        local parentFrame = G2L["4d"]
+        local inputField = G2L["51"]
+        
+        if parentFrame.AbsoluteSize.X < 10 then -- When the parent shrinks to near-zero
+            TweenService:Create(inputField, fadeOutInfo, {TextTransparency = 1, BackgroundTransparency = 1}):Play()
+            TweenService:Create(inputStroke, fadeOutInfo, {Transparency = 1}):Play()
+        else -- When it grows back
+            inputField.TextTransparency = 0
+            inputField.BackgroundTransparency = 0.4
+            inputStroke.Transparency = 0
+        end
+    end)
+end)
 
 
 G2L["52"] = Instance.new("Frame", G2L["4c"]);
